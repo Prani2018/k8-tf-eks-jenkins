@@ -27,3 +27,14 @@
 |-- terraform.tfvars                           # Terraform variables for this project
 |-- variables.tf                               # Terraform variable definitions
 `-- vpc.tf                                     # Terraform configuration for the VPC
+
+
+Step1: Create s3 bucket to store the terraform statefile with the same name as in backed file.
+Step2: From k8-tf-eks-jenkins directory, run commands
+       terraform init
+       terraform validate
+       terraform plan
+       terraform apply
+Step3: Setup Jenkins and create Node and maven installation label, and run node agent on build server.
+       Run Groovy scripts available to create them 
+Step4: Create jenkins pipeline job using the JenkinsPipeline to create EKS-CLUSTER and deploy pods.
