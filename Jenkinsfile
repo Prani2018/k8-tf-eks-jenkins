@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 pipeline {
     agent any
     
@@ -10,11 +9,9 @@ pipeline {
         )
     }
     
-=======
 #!/usr/bin/env groovy
 pipeline {
     agent any
->>>>>>> k8s
     environment {
         AWS_ACCESS_KEY_ID = credentials('AWS_ACCESS_KEY_ID')
         AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
@@ -22,17 +19,13 @@ pipeline {
     }
 	
     stages {
-<<<<<<< HEAD
         stage("Terraform Action") {
-=======
         stage("Create an EKS Cluster") {
->>>>>>> k8s
             steps {
                 script {
                     dir('eks-cluster') {
                         sh "terraform init"
-<<<<<<< HEAD
-                        
+                       
                         if (params.ACTION == 'apply') {
                             echo "Applying Terraform configuration..."
                             sh "terraform apply -auto-approve"
@@ -40,22 +33,17 @@ pipeline {
                             echo "Destroying Terraform infrastructure..."
                             sh "terraform destroy -auto-approve"
                         }
-=======
                         sh "terraform apply -auto-approve"
->>>>>>> k8s
                     }
                 }
             }
         }
-<<<<<<< HEAD
         
         stage("Deploy to EKS") {
             when {
                 expression { params.ACTION == 'apply' }
             }
-=======
         stage("Deploy to EKS") {
->>>>>>> k8s
             steps {
                 script {
                     dir('Kubernetes') {
@@ -67,7 +55,6 @@ pipeline {
                 }
             }
         }
-<<<<<<< HEAD
         
         stage("Cleanup Kubernetes Resources") {
             when {
@@ -116,7 +103,5 @@ pipeline {
                 }
             }
         }
-=======
->>>>>>> k8s
     }
 }
