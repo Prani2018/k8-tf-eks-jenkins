@@ -1,3 +1,4 @@
+#!/usr/bin/env groovy
 pipeline {
     agent any
     
@@ -9,9 +10,6 @@ pipeline {
         )
     }
     
-#!/usr/bin/env groovy
-pipeline {
-    agent any
     environment {
         AWS_ACCESS_KEY_ID = credentials('AWS_ACCESS_KEY_ID')
         AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
@@ -20,12 +18,11 @@ pipeline {
 	
     stages {
         stage("Terraform Action") {
-        stage("Create an EKS Cluster") {
             steps {
                 script {
                     dir('eks-cluster') {
                         sh "terraform init"
-                       
+                        
                         if (params.ACTION == 'apply') {
                             echo "Applying Terraform configuration..."
                             sh "terraform apply -auto-approve"
@@ -33,7 +30,6 @@ pipeline {
                             echo "Destroying Terraform infrastructure..."
                             sh "terraform destroy -auto-approve"
                         }
-                        sh "terraform apply -auto-approve"
                     }
                 }
             }
@@ -43,7 +39,6 @@ pipeline {
             when {
                 expression { params.ACTION == 'apply' }
             }
-        stage("Deploy to EKS") {
             steps {
                 script {
                     dir('Kubernetes') {
