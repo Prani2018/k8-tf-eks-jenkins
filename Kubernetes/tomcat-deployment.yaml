@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: tomcat-deployment
+  name: simple-web-app
   labels:
-    app: tomcat
+    app: simple-web-app
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
-      app: tomcat
+      app: simple-web-app
   template:
     metadata:
       labels:
-        app: tomcat
+        app: simple-web-app
     spec:
       containers:
-      - name: tomcat
-        image: tomcat:9.0-alpine
+      - name: simple-web-app
+        image: gcpa2279/simple-web-app:latest
         ports:
         - containerPort: 8080
