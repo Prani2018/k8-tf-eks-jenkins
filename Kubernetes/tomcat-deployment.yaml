@@ -19,3 +19,9 @@ spec:
         image: gcpa2279/simple-web-app:latest
         ports:
         - containerPort: 8080
+spec:
+  imagePullSecrets:
+    - name: my-registry-secret
+  containers:
+  - name: simple-web-app
+    image: your-private-repo/your-app:latest
